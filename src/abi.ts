@@ -141,7 +141,7 @@ class TableDef {
  * Abi defination
  */
 class AbiDef {
-  version: string = "gcfio:1.0";
+  version: string = "zchain:1.0";
   types: Array<AbiAliasDef> = new Array<AbiAliasDef>();
   structs: Array<StructDef> = new Array<StructDef>();
   actions: Array<ActionDef> = new Array<ActionDef>();
