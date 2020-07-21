@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+/* tslint:disable */
+
+const tailArgs = process.argv.indexOf("--");
+if (~tailArgs) {
+  require("child_process").spawnSync(
+    process.argv[0],
+    process.argv.slice(tailArgs + 1).concat(
+      process.argv.slice(1, tailArgs)
+    ),
+    { stdio: "inherit" }
+  );
+  return;
+}
+
+try { require("source-map-support").install(); } catch (e) {}
+
+const usc = module.exports = require("../cli/asc.js");
+if (/\busc|asc$/.test(process.argv[1])) {
+  
+  // There are two steps to generate the wast file
+  process.exitCode = usc.main(process.argv.slice(2), null, null, 1);
+  process.exitCode = usc.main(process.argv.slice(2), null, null, 2);
+  return process.exitCode;
+}
